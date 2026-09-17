@@ -1,0 +1,109 @@
+/* =========================================================
+   全画面共通のデザイントークンと部品
+   Web版の各CSSで繰り返し使われていた色・角丸・ヘッダー・
+   ボタンのスタイルをここに集約する。
+   各画面のUSSからはクラス名を付けるだけで使えるようにする。
+   ========================================================= */
+
+:root {
+    --color-primary: #0b3c5d;
+    --color-bg: #f4f7f6;
+    --color-surface: #ffffff;
+    --color-text: #2c3e50;
+    --color-text-weak: #7f8c8d;
+    --color-border: #dcdde1;
+    --color-danger: #e74c3c;
+
+    --radius-card: 12px;
+    --radius-control: 6px;
+}
+
+/* 画面のルート。Web版の body 相当 */
+.screen {
+    flex-grow: 1;
+    background-color: var(--color-bg);
+}
+
+/* ---------------------------------------------------------
+   アプリ共通ヘッダー (.app-header)
+   Web版: 高さ60px・中央にタイトル・左端に戻るボタン
+   --------------------------------------------------------- */
+.app-header {
+    height: 60px;
+    background-color: var(--color-primary);
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.app-header__title {
+    font-size: 18px;
+    color: white;
+    -unity-font-style: bold;
+}
+
+/* Web版は position:absolute; left:15px。USSでも position:absolute は使える */
+.app-header__back {
+    position: absolute;
+    left: 15px;
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    color: white;
+    font-size: 14px;
+    padding: 10px;
+    margin: 0;
+}
+
+/* ---------------------------------------------------------
+   カード・ボタン・入力欄の共通形
+   --------------------------------------------------------- */
+.card {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-card);
+    padding: 25px 15px;
+}
+
+.primary-button {
+    height: 48px;
+    background-color: var(--color-primary);
+    color: white;
+    border-width: 0;
+    border-radius: var(--radius-control);
+    font-size: 16px;
+    -unity-font-style: bold;
+    margin: 10px 0 0 0;
+}
+
+.primary-button:hover {
+    background-color: #114f79;
+}
+
+/* Web版の .login-btn:active { transform: translateY(2px) } に相当。
+   USSでは transform ではなく translate プロパティを使う */
+.primary-button:active {
+    translate: 0 2px;
+}
+
+.link-button {
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    color: var(--color-primary);
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+}
+
+.text-input .unity-base-text-field__input {
+    height: 42px;
+    background-color: var(--color-surface);
+    border-width: 1px;
+    border-color: var(--color-border);
+    border-radius: var(--radius-control);
+    padding: 0 12px;
+    font-size: 14px;
+    color: var(--color-text);
+}
+
+.text-input .unity-base-text-field__input:focus {
+    border-color: var(--color-primary);
+}

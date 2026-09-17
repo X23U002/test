@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ログイン画面 (Web版 map画面/html/login.html の移植)
+
+    HTMLとの対応:
+      <div class="login-container">  -> <ui:VisualElement class="login-container">
+      <h1 class="app-title">         -> <ui:Label class="app-title">
+      <input type="text">            -> <ui:TextField>
+      <input type="password">        -> <ui:TextField password="true">
+      <button onclick="...">         -> <ui:Button name="..."> (処理はC#側で購読)
+      <a href="newaccount.html">     -> <ui:Button class="link-button"> (画面遷移もC#側)
+-->
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+
+    <Style src="Common.uss" />
+    <Style src="Login.uss" />
+
+    <ui:VisualElement class="screen login-screen">
+
+        <ui:VisualElement class="login-container">
+
+            <ui:Label text="聖地巡礼NAVI" class="app-title" />
+
+            <ui:VisualElement class="instruction">
+                <ui:Label text="ユーザーIDとパスワードを入力してください。" class="instruction__text" />
+                <ui:Label text="※忘れた場合は新規登録時の確認メールを確認" class="small-text" />
+            </ui:VisualElement>
+
+            <ui:VisualElement class="form-group">
+                <ui:Label text="ユーザーID" class="form-label" />
+                <ui:TextField name="userid-field" class="text-input" />
+                <ui:Label text="(例) u1" class="form-hint" />
+            </ui:VisualElement>
+
+            <ui:VisualElement class="form-group">
+                <ui:Label text="パスワード" class="form-label" />
+                <ui:TextField name="password-field" password="true" class="text-input" />
+                <ui:Label text="(例) seiti555" class="form-hint" />
+            </ui:VisualElement>
+
+            <ui:Button name="login-button" text="ログイン" class="primary-button" />
+
+            <ui:VisualElement class="links">
+                <ui:Button name="newaccount-button" text="新規登録" class="link-button" />
+                <ui:Button name="forgot-password-button" text="パスワードを忘れた場合" class="link-button" />
+            </ui:VisualElement>
+
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+
+</ui:UXML>

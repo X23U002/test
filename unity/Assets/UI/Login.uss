@@ -1,0 +1,85 @@
+/* =========================================================
+   ログイン画面のスタイル
+   Web版 map画面/css/login.css の移植。
+   元CSSからの変更点はコメントで明記している。
+   ========================================================= */
+
+/* body { display:flex; justify-content:center; align-items:center; height:100vh }
+   -> 100vh は flex-grow:1 (親いっぱい) で表現する */
+.login-screen {
+    justify-content: center;
+    align-items: center;
+}
+
+/* .login-container
+   box-shadow はUSSに無いため、薄い枠線で代用している。
+   影が必須ならスライス画像を background-image にする方法もある */
+.login-container {
+    background-color: var(--color-surface);
+    width: 90%;
+    max-width: 340px;
+    padding: 30px 20px;
+    border-radius: var(--radius-card);
+    border-width: 1px;
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+/* text-align は -unity-text-align に置き換える */
+.app-title {
+    -unity-text-align: middle-center;
+    color: var(--color-primary);
+    font-size: 24px;
+    -unity-font-style: bold;
+    margin-bottom: 20px;
+}
+
+/* border-left: 4px solid #0b3c5d
+   -> USSに border 一括指定 (border-style) は無いので長い書き方にする */
+.instruction {
+    background-color: rgba(11, 60, 93, 0.05);
+    padding: 10px;
+    border-left-width: 4px;
+    border-left-color: var(--color-primary);
+    margin-bottom: 20px;
+}
+
+.instruction__text {
+    font-size: 13px;
+    color: var(--color-text);
+    white-space: normal;
+}
+
+.small-text {
+    font-size: 11px;
+    color: var(--color-text-weak);
+    margin-top: 4px;
+    white-space: normal;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* label { display:block } は不要。USSは既定で縦積み(flex-direction:column) */
+.form-label {
+    font-size: 13px;
+    -unity-font-style: bold;
+    color: var(--color-primary);
+    margin-bottom: 5px;
+}
+
+/* Web版は placeholder 属性で例を出していた。
+   Unity 6 未満の TextField には placeholder が無いため小さなラベルで代用。
+   Unity 6 以降なら UXML 側で placeholder-text="(例) u1" が使える */
+.form-hint {
+    font-size: 10px;
+    color: var(--color-text-weak);
+    margin-top: 3px;
+}
+
+/* .links { display:flex; justify-content:space-between } */
+.links {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+}
