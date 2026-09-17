@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 獲得スタンプ一覧 (Web版 map画面/html/stamp.html の移植) -->
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+
+    <Style src="Common.uss" />
+    <Style src="Stamp.uss" />
+
+    <ui:VisualElement class="screen">
+
+        <ui:VisualElement class="app-header">
+            <ui:Button name="back-button" text="＜ 戻る" class="app-header__back" />
+            <ui:Label text="獲得スタンプ" class="app-header__title" />
+        </ui:VisualElement>
+
+        <ui:VisualElement class="content">
+
+            <ui:Button name="filter-toggle-button" class="filter-button">
+                <ui:Label text="🎛 絞り込み (作品名)" class="filter-button__label" />
+                <ui:Label text="▼" class="filter-button__arrow" />
+            </ui:Button>
+
+            <!-- 絞り込みメニュー。中身はC#側で作品名から動的に生成する -->
+            <ui:VisualElement name="filter-dropdown" class="filter-dropdown" style="display: none;">
+                <ui:VisualElement name="filter-checkbox-container" />
+                <ui:VisualElement class="filter-dropdown__buttons">
+                    <ui:Button name="filter-reset-button" text="リセット" class="muted-button filter-dropdown__button" />
+                    <ui:Button name="filter-apply-button" text="決定" class="primary-button filter-dropdown__button" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <ui:VisualElement class="card">
+                <ui:ScrollView>
+                    <!-- Web版: display:grid; grid-template-columns:repeat(3,1fr); gap:25px 10px
+                         -> flex-wrap + 子の width で再現 (Stamp.uss参照) -->
+                    <ui:VisualElement name="stamp-grid" class="stamp-grid" />
+                </ui:ScrollView>
+            </ui:VisualElement>
+
+        </ui:VisualElement>
+
+        <!-- スタンプ詳細モーダル -->
+        <ui:VisualElement name="detail-modal" class="modal-overlay" style="display: none;">
+            <ui:VisualElement class="modal-content modal-content--center">
+
+                <ui:Button name="modal-close-button" text="✖" class="modal-close-button" />
+
+                <ui:Label text="⛩️" class="stamp-big-circle" />
+                <ui:Label name="modal-title" text="〇〇神社" class="spot-title" />
+                <ui:Label name="modal-date" text="訪問日時：-" class="visit-date" />
+
+                <ui:VisualElement class="detail-group">
+                    <ui:Label text="🎬 作品名" class="info-label" />
+                    <ui:Label name="modal-anime" text="-" class="info-text" />
+
+                    <ui:Label text="📺 シーン" class="info-label" />
+                    <ui:Label name="modal-scene" text="-" class="info-text" />
+
+                    <ui:Label text="📍 住所" class="info-label" />
+                    <ui:Label name="modal-address" text="-" class="info-text" />
+                </ui:VisualElement>
+
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+
+</ui:UXML>

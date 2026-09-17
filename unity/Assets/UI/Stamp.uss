@@ -1,0 +1,146 @@
+/* 獲得スタンプ一覧 (Web版 map画面/css/stamp.css の移植) */
+
+.filter-button {
+    background-color: var(--color-surface);
+    border-width: 1px;
+    border-color: var(--color-border);
+    border-radius: var(--radius-control);
+    padding: 12px 15px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 20px 0;
+}
+
+.filter-button__label {
+    font-size: 13px;
+    -unity-font-style: bold;
+    color: var(--color-primary);
+}
+
+.filter-button__arrow {
+    font-size: 13px;
+    color: var(--color-primary);
+}
+
+/* .filter-dropdown { display:flex; flex-direction:column; gap:10px } */
+.filter-dropdown {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-control);
+    margin-bottom: 20px;
+    padding: 15px;
+}
+
+.filter-dropdown__buttons {
+    flex-direction: row;
+    margin-top: 15px;
+}
+
+.filter-dropdown__button {
+    flex-grow: 1;
+    margin: 0 5px;
+}
+
+/* --- スタンプのグリッド ---
+   Web版: display:grid; grid-template-columns:repeat(3,1fr); gap:25px 10px
+   USSにgridは無いので、行方向のflexを折り返して3列にする */
+.stamp-grid {
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.stamp-item {
+    width: 30%;
+    margin: 0 5px 25px 5px;
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    align-items: center;
+    padding: 0;
+}
+
+.stamp-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    -unity-text-align: middle-center;
+    font-size: 30px;
+    margin-bottom: 8px;
+    border-width: 3px;
+    border-color: white;
+    transition-property: scale;
+    transition-duration: 0.2s;
+}
+
+.stamp-item:active .stamp-circle {
+    scale: 0.95 0.95;
+}
+
+.stamp-circle--earned {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+/* Web版は .stamp-circle.unearned::after { content:"未" } で
+   未獲得マークを出していた。USSに content は無いので、
+   C#側でLabelのテキストを "未" に差し替える運用にする */
+.stamp-circle--unearned {
+    background-color: #bdc3c7;
+    border-color: #ecf0f1;
+    color: var(--color-text-weak);
+    font-size: 16px;
+    opacity: 0.6;
+}
+
+.stamp-label {
+    font-size: 12px;
+    -unity-font-style: bold;
+    color: var(--color-text);
+    -unity-text-align: middle-center;
+    white-space: normal;
+}
+
+/* --- 詳細モーダル --- */
+.modal-content--center {
+    align-items: center;
+    padding: 30px 20px;
+}
+
+.stamp-big-circle {
+    width: 90px;
+    height: 90px;
+    background-color: var(--color-primary);
+    color: white;
+    border-radius: 50%;
+    -unity-text-align: middle-center;
+    font-size: 40px;
+    margin-bottom: 15px;
+    border-width: 4px;
+    border-color: var(--color-bg);
+}
+
+.spot-title {
+    font-size: 20px;
+    -unity-font-style: bold;
+    color: var(--color-primary);
+    margin-bottom: 10px;
+}
+
+/* display:inline-block は USS に無い。
+   align-self:center で「中身の幅だけの箱」を中央に置く */
+.visit-date {
+    align-self: center;
+    font-size: 12px;
+    color: var(--color-danger);
+    -unity-font-style: bold;
+    background-color: rgba(231, 76, 60, 0.1);
+    padding: 6px 12px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.detail-group {
+    width: 100%;
+    border-top-width: 1px;
+    border-top-color: #ecf0f1;
+    padding-top: 15px;
+}

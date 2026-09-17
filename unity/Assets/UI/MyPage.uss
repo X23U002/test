@@ -1,0 +1,123 @@
+/* マイページ (Web版 map画面/css/mypage.css の移植) */
+
+/* .profile-card { display:flex; align-items:center; gap:15px } */
+.profile-card {
+    background-color: var(--color-surface);
+    padding: 20px;
+    border-radius: var(--radius-card);
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+/* border-radius:50% は USS でも同じ書き方でよい */
+.profile-icon {
+    width: 60px;
+    height: 60px;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    font-size: 30px;
+    -unity-text-align: middle-center;
+    /* gap:15px の代替。子要素側のmarginで間隔を作る */
+    margin-right: 15px;
+}
+
+.profile-info {
+    flex-grow: 1;
+}
+
+.user-name {
+    font-size: 20px;
+    -unity-font-style: bold;
+    color: var(--color-primary);
+    margin-bottom: 5px;
+}
+
+.user-id {
+    font-size: 13px;
+    color: var(--color-text-weak);
+}
+
+.edit-profile-button {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    background-color: #ecf0f1;
+    border-width: 0;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 12px;
+    -unity-font-style: bold;
+    color: var(--color-text);
+    margin: 0;
+}
+
+.edit-profile-button:active {
+    background-color: var(--color-border);
+}
+
+/* .menu-list { display:flex; flex-direction:column; gap:12px } */
+.menu-list {
+    flex-direction: column;
+}
+
+.menu-item {
+    background-color: var(--color-surface);
+    border-width: 0;
+    border-radius: var(--radius-card);
+    padding: 18px 20px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+    -unity-font-style: bold;
+    color: var(--color-text);
+    /* gap:12px の代替 */
+    margin: 0 0 12px 0;
+}
+
+.menu-item:active {
+    background-color: #f0f0f0;
+    scale: 0.98 0.98;
+}
+
+.menu-item__label {
+    font-size: 15px;
+    -unity-font-style: bold;
+    color: var(--color-text);
+}
+
+.menu-item__arrow {
+    font-size: 15px;
+    color: var(--color-text-weak);
+}
+
+.menu-item--logout {
+    margin-top: 20px;
+    color: var(--color-danger);
+    justify-content: center;
+}
+
+/* --- アイコン選択グリッド ---
+   Web版: display:grid; grid-template-columns:repeat(3,1fr); gap:10px */
+.icon-grid {
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.icon-option {
+    width: 30%;
+    margin: 0 5px 10px 5px;
+    font-size: 32px;
+    -unity-text-align: middle-center;
+    padding: 10px;
+    background-color: var(--color-bg);
+    border-radius: var(--radius-control);
+    border-width: 3px;
+    border-color: rgba(0, 0, 0, 0);
+}
+
+.icon-option--selected {
+    border-color: var(--color-primary);
+    background-color: #e6f2f5;
+}

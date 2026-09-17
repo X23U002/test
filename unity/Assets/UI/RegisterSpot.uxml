@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 聖地登録 (Web版 map画面/html/register.html の移植) -->
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+
+    <Style src="Common.uss" />
+    <Style src="Sheet.uss" />
+
+    <ui:VisualElement class="screen sheet-screen">
+
+        <!-- 入力画面 -->
+        <ui:ScrollView name="input-page" class="sheet-scroll">
+            <ui:VisualElement class="sheet-card">
+
+                <ui:Button name="close-button" text="✖" class="close-x-button" />
+                <ui:Label text="聖地登録" class="sheet-title" />
+                <ui:Label text="聖地スポットの追加に必要な情報を入力してください。" class="description" />
+
+                <ui:VisualElement class="divider" />
+
+                <ui:Label text="作品名" class="sheet-label" />
+                <ui:TextField name="anime-name-field" class="text-input" />
+                <ui:Label text="※略称ではなく正式名称で入力してください。" class="note" />
+
+                <ui:VisualElement class="divider" />
+
+                <ui:Label text="住所" class="sheet-label" />
+                <ui:TextField name="address-field" class="text-input" />
+
+                <ui:VisualElement class="divider" />
+
+                <!-- Web版の <input type="file"> は Unity には無い。
+                     モバイルのギャラリー/カメラ呼び出し(NativeGallery等)を
+                     C#側から呼ぶボタンに置き換える -->
+                <ui:Label text="画像" class="sheet-label" />
+                <ui:Button name="select-image-button" text="画像を選択" class="muted-button" />
+                <ui:Label name="selected-image-label" text="未選択" class="note" />
+
+                <ui:VisualElement class="divider" />
+
+                <ui:Label text="スポットの説明" class="sheet-label" />
+                <ui:TextField name="spot-text-field" multiline="true" class="text-input textarea" />
+                <ui:Label text="※何期の何話のどのシーンかを書いていただけると助かります。" class="note" />
+
+                <ui:Button name="register-button" text="聖地登録申請" class="primary-button sheet-action" />
+
+            </ui:VisualElement>
+        </ui:ScrollView>
+
+        <!-- 登録完了画面 -->
+        <ui:VisualElement name="complete-page" class="sheet-scroll" style="display: none;">
+            <ui:VisualElement class="sheet-card">
+
+                <ui:Button name="complete-close-button" text="✖" class="close-x-button" />
+                <ui:Label text="登録申請が完了しました" class="sheet-title" />
+
+                <ui:Label text="ご協力いただき、ありがとうございました。&#10;&#10;運営で確認が完了しましたらスポットの登録をいたします。&#10;&#10;スポットの登録が完了後、マイページに登録完了の通知をいたします。&#10;&#10;今後も当アプリをご愛用いただけますと幸いです。" class="complete-text" />
+
+                <ui:Button name="back-to-map-button" text="マップに戻る" class="primary-button" />
+
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+
+</ui:UXML>

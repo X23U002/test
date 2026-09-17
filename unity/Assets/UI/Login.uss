@@ -1,7 +1,8 @@
 /* =========================================================
    ログイン画面のスタイル
    Web版 map画面/css/login.css の移植。
-   元CSSからの変更点はコメントで明記している。
+   共通部分 (.instruction / .form-group / .primary-button など) は
+   Common.uss にあるので、ここは差分だけ。
    ========================================================= */
 
 /* body { display:flex; justify-content:center; align-items:center; height:100vh }
@@ -33,48 +34,18 @@
     margin-bottom: 20px;
 }
 
-/* border-left: 4px solid #0b3c5d
-   -> USSに border 一括指定 (border-style) は無いので長い書き方にする */
-.instruction {
-    background-color: rgba(11, 60, 93, 0.05);
-    padding: 10px;
-    border-left-width: 4px;
-    border-left-color: var(--color-primary);
-    margin-bottom: 20px;
-}
-
-.instruction__text {
-    font-size: 13px;
-    color: var(--color-text);
-    white-space: normal;
-}
-
-.small-text {
-    font-size: 11px;
-    color: var(--color-text-weak);
-    margin-top: 4px;
-    white-space: normal;
-}
-
-.form-group {
+/* login.css はフォームの余白が他画面より詰まっているので上書き */
+.login-container .form-group {
     margin-bottom: 15px;
 }
 
-/* label { display:block } は不要。USSは既定で縦積み(flex-direction:column) */
-.form-label {
-    font-size: 13px;
-    -unity-font-style: bold;
-    color: var(--color-primary);
+.login-container .form-label {
     margin-bottom: 5px;
 }
 
-/* Web版は placeholder 属性で例を出していた。
-   Unity 6 未満の TextField には placeholder が無いため小さなラベルで代用。
-   Unity 6 以降なら UXML 側で placeholder-text="(例) u1" が使える */
-.form-hint {
-    font-size: 10px;
-    color: var(--color-text-weak);
-    margin-top: 3px;
+.login-container .instruction {
+    margin-bottom: 20px;
+    padding: 10px;
 }
 
 /* .links { display:flex; justify-content:space-between } */

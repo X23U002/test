@@ -1,9 +1,24 @@
 # UI Toolkit で Web版UIを移行する手順
 
 `map画面/css/` の約2,700行のCSSと `html/` の10画面を、Unityの **UI Toolkit**
-（UXML + USS）へ移すための手引き。サンプルとしてログイン画面を変換済み
-（`unity/Assets/UI/Login.uxml` / `Login.uss` / `Common.uss`、
-C#は `unity/Assets/Scripts/UI/Toolkit/LoginScreenView.cs`）。
+（UXML + USS）へ移した記録と手引き。**全10画面を変換済み**で、
+ファイルは `unity/Assets/UI/`（UXML/USS）と
+`unity/Assets/Scripts/UI/Toolkit/`（C#）にある。
+
+| Web版 | UXML | USS | C# |
+|---|---|---|---|
+| login.html | `Login.uxml` | `Login.uss` | `LoginScreenView.cs` |
+| newaccount.html | `NewAccount.uxml` | (Common) | `NewAccountScreenView.cs` |
+| confirm.html | `Confirm.uxml` | `Confirm.uss` | `ConfirmScreenView.cs` |
+| forgot_password.html | `ForgotPassword.uxml` | (Common) | `ForgotPasswordScreenView.cs` |
+| mypage.html | `MyPage.uxml` | `MyPage.uss` | `MyPageScreenView.cs` |
+| history.html | `History.uxml` | `History.uss` | `HistoryScreenView.cs` |
+| stamp.html | `Stamp.uxml` + `StampItem.uxml` | `Stamp.uss` | `StampScreenView.cs` |
+| register.html | `RegisterSpot.uxml` | `Sheet.uss` | `RegisterSpotScreenView.cs` |
+| information.html | `Information.uxml` | `Sheet.uss` | `InformationScreenView.cs` |
+| map.html (HUD部分) | `MapHud.uxml` | `MapHud.uss` | `MapHudView.cs` |
+
+全画面で共通の色・ヘッダー・フォーム・モーダルは `Common.uss` に集約している。
 
 ## 1. UI Toolkit とは
 
@@ -125,17 +140,46 @@ private void OnEnable() {
 各画面のUIDocumentごとGameObjectをSetActiveするか、
 1つのUIDocumentの中でルート要素の `style.display` を切り替える。
 
-## 5. 進め方の提案
+## 5. 変換時に判断したこと
 
-1. **ログイン画面**（変換済み）でUIDocument・PanelSettings・日本語フォントの
-   セットアップを通し、表示できることを確認する。
-2. 同じ形の画面（newaccount / confirm / forgot_password）を横展開する。
-   ヘッダーとフォームは `Common.uss` の `.app-header` / `.text-input` /
-   `.primary-button` を使い回せる。
-3. mypage / stamp / history を移す。grid・::after・gap の代替がここに集中している。
-4. 最後に地図画面（style.css・1,083行）。ここは地図本体が `IMapView` 側の
-   描画になるため、HUD（検索バー・絞り込み・経路パネル）だけをUXML化する。
+元CSSをそのまま移せなかった箇所は、以下のように読み替えている。
+
+- **タイムラインの丸と線**（history.css の `::before` / `::after`）
+  → `.timeline-node__dot` / `.timeline-node__line` という実体の
+  `VisualElement` をUXMLに置き、`position: absolute` で重ねた。
+  最後のノードは `:last-child` が使えないため、UXML側で
+  `timeline-node--last` クラスを明示的に付けている。
+- **スタンプ一覧とアイコン選択の3列グリッド**（`display: grid`）
+  → `flex-direction: row; flex-wrap: wrap;` ＋ 子に `width: 30%`。
+- **未獲得スタンプの「未」表示**（`::after { content: "未" }`）
+  → USSに `content` は無いので、C#側でLabelのテキストを差し替える方式に変更。
+- **モーダル**（`position: fixed`）→ `position: absolute`。
+  親を画面いっぱいにしてあるので見た目は同じ。
+- **破線**（`border: 1px dashed`）→ USSに `border-style` が無いため実線。
+- **`display: inline-block`**（スタンプの訪問日時バッジ、ポップアップの作品名バッジ）
+  → `align-self: center` / `align-self: flex-start`。
+- **`<input type="file">`**（聖地登録・お問い合わせの画像添付）
+  → Unityに相当機能が無いため「画像を選択」ボタンに置き換え、
+  実処理は未実装（NativeGallery等のプラグイン導入が必要）。
+- **`object-fit: cover`**（ポップアップのスポット画像）
+  → `-unity-background-scale-mode: scale-and-crop`。
+  画像はC#で `UnityWebRequestTexture` から読み込み `style.backgroundImage` に入れる。
+
+## 6. 残っている作業
+
+1. **シーンへの配置と表示確認**。UIDocument・PanelSettings・日本語フォントを
+   設定して、各画面が崩れずに出るか確認する（Unity Editorが必要なため未検証）。
+2. **地図HUDと地図本体の接続**。`MapHudView` は検索・絞り込みをイベント
+   （`OnSearchSubmitted` / `OnFilterApplied` / `OnFilterReset`）で外に出すだけなので、
+   `PilgrimageMapController` 側でこれを購読する処理を書く必要がある。
+   現状の `PilgrimageMapController` はuGUI版の
+   `SpotPopupPanel` / `AnimeFilterPanel` / `RoutePanelController` を参照しているため、
+   UI Toolkitに寄せるならこの参照を `MapHudView` 1つに差し替える。
+3. **uGUI版の削除**。UI Toolkit版で問題なく動くことを確認できたら、
+   `Scripts/UI/*.cs`（uGUI版）は不要になる。移行中は両方残してある。
+4. **`box-shadow` の見た目**。今は薄い枠線で代用しているので、
+   影を再現したい場合は9スライス画像を用意する。
 
 注意: 地図描画そのものはUI Toolkitでは行わない。`FlatMapView` はuGUIの
-RectTransformベースなので、HUDをUI Toolkitにする場合は地図とHUDが別レイヤーに
-なる（UIDocumentはuGUIのCanvasより手前/奥をSort Orderで指定できる）。
+RectTransformベースなので、地図とHUDは別レイヤーになる
+（UIDocumentのPanel SettingsのSort OrderでuGUIのCanvasとの前後を調整する）。

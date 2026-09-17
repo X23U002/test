@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    地図画面のHUD (Web版 map画面/html/map.html + css/style.css の移植)
+
+    地図そのものは描画しない。地図は IMapView (FlatMapView など) が
+    描き、このUXMLはその上に重ねるボタン・検索バー・パネル類だけを持つ。
+    UIDocumentのPanel SettingsのSort Orderを地図より大きくして前面に出す。
+-->
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+
+    <Style src="Common.uss" />
+    <Style src="MapHud.uss" />
+
+    <!-- picking-mode="Ignore" にしないと、透明な全面パネルが
+         地図のドラッグ操作を奪ってしまう -->
+    <ui:VisualElement name="hud-root" class="hud-root" picking-mode="Ignore">
+
+        <!-- 上部: ハンバーガー / 検索バー / マイページ -->
+        <ui:Button name="hamburger-button" class="round-button hamburger-button">
+            <ui:VisualElement class="hamburger-line" />
+            <ui:VisualElement class="hamburger-line" />
+            <ui:VisualElement class="hamburger-line" />
+        </ui:Button>
+
+        <ui:TextField name="search-field" class="search-field" />
+
+        <ui:Button name="profile-button" text="👤" class="round-button profile-button" />
+
+        <!-- アニメ絞り込みボタン -->
+        <ui:Button name="filter-open-button" text="🎬 アニメで絞り込み" class="filter-open-button" />
+
+        <!-- 右下: 現在地 / 2D・3D切替 -->
+        <ui:Button name="location-button" text="📍" class="round-button location-button" />
+        <ui:Button name="toggle-view-button" text="🔄 3D" class="toggle-view-button" />
+
+        <!-- 左サイドメニュー。開閉は left の値で表現する -->
+        <ui:VisualElement name="side-menu" class="side-menu">
+            <ui:Button name="close-menu-button" text="❮❮" class="side-menu__close" />
+            <ui:Label text="メニュー" class="side-menu__title" />
+            <ui:Button name="menu-information-button" text="お問い合わせ" class="side-menu__item" />
+            <ui:Button name="menu-register-button" text="聖地登録" class="side-menu__item" />
+            <ui:Button name="menu-guide-button" text="操作ガイド" class="side-menu__item" />
+        </ui:VisualElement>
+
+        <!-- アニメ絞り込み (下からせり上がるハーフシート) -->
+        <ui:VisualElement name="filter-modal" class="filter-modal" style="display: none;">
+            <ui:VisualElement class="filter-modal__header">
+                <ui:Label text="アニメで絞り込み" class="filter-modal__title" />
+                <ui:Button name="filter-close-button" text="✕" class="filter-modal__close" />
+            </ui:VisualElement>
+
+            <ui:TextField name="anime-search-field" class="text-input" />
+
+            <ui:ScrollView name="anime-list" class="anime-list" />
+
+            <ui:VisualElement class="filter-modal__buttons">
+                <ui:Button name="filter-reset-button" text="リセット" class="muted-button filter-modal__reset" />
+                <ui:Button name="filter-apply-button" text="決定" class="primary-button filter-modal__ok" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- 経路案内パネル -->
+        <ui:VisualElement name="route-panel" class="route-panel" style="display: none;">
+            <ui:VisualElement class="route-panel__header">
+                <ui:Label text="📍 ルート案内" class="route-panel__title" />
+                <ui:Button name="clear-route-button" text="全削除" class="route-panel__clear" />
+            </ui:VisualElement>
+
+            <ui:ScrollView name="route-list" class="route-list" />
+
+            <ui:Button name="open-google-route-button" text="Googleマップで案内" class="success-button" />
+        </ui:VisualElement>
+
+        <!-- スポット詳細ポップアップ (Web版はMapboxのpopup) -->
+        <ui:VisualElement name="spot-popup" class="popup-card" style="display: none;">
+            <ui:Button name="popup-close-button" text="✕" class="popup-card__close" />
+            <ui:Label name="popup-title" text="作品名" class="popup-title" />
+            <ui:Label name="popup-spot-name" text="スポット名" class="popup-spot" />
+
+            <ui:Label text="登場シーン" class="popup-section-label" />
+            <ui:Label name="popup-scene" text="情報がありません" class="popup-section-text" />
+
+            <ui:VisualElement name="popup-image" class="popup-image" />
+
+            <ui:Label name="stamp-message" text="半径50m以内で取得できます" class="stamp-message" />
+            <ui:Button name="stamp-button" text="📍 現在地を取得してください" class="stamp-button" />
+
+            <ui:VisualElement class="popup-buttons">
+                <ui:Button name="popup-home-button" text="🌐" class="popup-home" />
+                <ui:Button name="add-route-button" text="📍ルートに追加" class="popup-route-button" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+
+</ui:UXML>

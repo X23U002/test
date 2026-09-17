@@ -1,0 +1,42 @@
+/* =========================================================
+   聖地登録 / お問い合わせ 共通のカード型レイアウト
+   Web版 map画面/css/register.css と information.css の移植。
+   この2画面はほぼ同じCSSだったので1ファイルにまとめている。
+   ========================================================= */
+
+/* body { display:flex; justify-content:center; align-items:flex-start; padding:40px 0 } */
+.sheet-screen {
+    background-color: #f3f3f3;
+}
+
+.sheet-scroll {
+    flex-grow: 1;
+    align-items: center;
+    padding: 40px 15px;
+}
+
+.sheet-label {
+    -unity-font-style: bold;
+    margin-bottom: 10px;
+    font-size: 17px;
+    color: var(--color-text);
+}
+
+.sheet-action {
+    height: 50px;
+    margin-top: 30px;
+    font-size: 18px;
+}
+
+.complete-text {
+    margin: 35px 0;
+    -unity-text-align: middle-center;
+    white-space: normal;
+    font-size: 16px;
+    color: var(--color-text);
+}
+
+/* register.css の @media (max-width:600px) で
+   .container の幅を100%にしていた部分は、
+   .sheet-card の max-width:420px + width:100% で
+   画面が狭いときに自動で縮むため、追加指定は不要 */

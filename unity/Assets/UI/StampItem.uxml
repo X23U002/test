@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    スタンプ1件分のテンプレート。
+    Web版 stamp.js が innerHTML で組み立てていた .stamp-item に相当する。
+    C#側から VisualTreeAsset.Instantiate() で複製して使う
+    (uGUIでいうPrefabのInstantiateと同じ役割)。
+-->
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+
+    <ui:Button name="stamp-item" class="stamp-item">
+        <ui:Label name="stamp-circle" text="⛩️" class="stamp-circle stamp-circle--earned" />
+        <ui:Label name="stamp-label" text="スポット名" class="stamp-label" />
+    </ui:Button>
+
+</ui:UXML>
