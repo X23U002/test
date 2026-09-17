@@ -1,0 +1,351 @@
+/* =========================================================
+   全画面共通のデザイントークンと部品
+   Web版の各CSSで繰り返し使われていた色・角丸・ヘッダー・
+   フォーム・モーダルのスタイルをここに集約する。
+   各画面のUSSは、この上に差分だけを書く。
+   ========================================================= */
+
+:root {
+    --color-primary: #0b3c5d;
+    --color-primary-hover: #14537f;
+    --color-bg: #f4f7f6;
+    --color-surface: #ffffff;
+    --color-text: #2c3e50;
+    --color-text-weak: #7f8c8d;
+    --color-border: #dcdde1;
+    --color-danger: #e74c3c;
+    --color-success: #2ecc71;
+    --color-accent: #f39c12;
+
+    --radius-card: 12px;
+    --radius-control: 8px;
+}
+
+/* 画面のルート。Web版の body 相当 */
+.screen {
+    flex-grow: 1;
+    background-color: var(--color-bg);
+}
+
+/* ---------------------------------------------------------
+   アプリ共通ヘッダー (.app-header)
+   Web版: 高さ60px・中央にタイトル・左端に戻るボタン
+   --------------------------------------------------------- */
+.app-header {
+    height: 60px;
+    background-color: var(--color-primary);
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.app-header__title {
+    font-size: 18px;
+    color: white;
+    -unity-font-style: bold;
+}
+
+/* Web版は position:absolute; left:15px。USSでも position:absolute は使える */
+.app-header__back {
+    position: absolute;
+    left: 15px;
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    color: white;
+    font-size: 14px;
+    padding: 10px;
+    margin: 0;
+}
+
+/* ---------------------------------------------------------
+   コンテンツ領域・見出し
+   --------------------------------------------------------- */
+.content {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.content--wide {
+    padding: 30px 20px;
+}
+
+.section-title {
+    font-size: 16px;
+    color: var(--color-primary);
+    -unity-font-style: bold;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom-width: 2px;
+    border-bottom-color: var(--color-border);
+}
+
+/* 案内テキスト。左に4pxの青帯 */
+.instruction {
+    background-color: rgba(11, 60, 93, 0.05);
+    padding: 12px;
+    border-left-width: 4px;
+    border-left-color: var(--color-primary);
+    margin-bottom: 25px;
+}
+
+.instruction__text {
+    font-size: 13px;
+    color: var(--color-text);
+    white-space: normal;
+}
+
+.small-text {
+    font-size: 11px;
+    color: var(--color-text-weak);
+    margin-top: 4px;
+    white-space: normal;
+}
+
+/* ---------------------------------------------------------
+   カード
+   --------------------------------------------------------- */
+.card {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-card);
+    padding: 25px 15px;
+}
+
+/* register.css / information.css の .container
+   (420px幅・黒枠のカード) */
+.sheet-card {
+    width: 100%;
+    max-width: 420px;
+    background-color: var(--color-surface);
+    border-width: 2px;
+    border-color: #222222;
+    border-radius: var(--radius-control);
+    padding: 30px;
+}
+
+.sheet-title {
+    -unity-text-align: middle-center;
+    font-size: 28px;
+    -unity-font-style: bold;
+    color: var(--color-text);
+    margin-bottom: 20px;
+}
+
+.description {
+    -unity-text-align: middle-center;
+    white-space: normal;
+    margin-bottom: 20px;
+    color: var(--color-text);
+}
+
+.note {
+    margin-top: 8px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: #666666;
+    white-space: normal;
+}
+
+/* <hr> 相当。1pxの線を持つ空のVisualElement */
+.divider {
+    height: 1px;
+    background-color: var(--color-border);
+    margin: 25px 0;
+}
+
+/* 画面右上の×ボタン */
+.close-x-button {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    font-size: 24px;
+    -unity-font-style: bold;
+    color: #000000;
+    margin: 0;
+    padding: 0;
+}
+
+.close-x-button:hover {
+    color: var(--color-primary);
+}
+
+/* ---------------------------------------------------------
+   ボタン
+   --------------------------------------------------------- */
+.primary-button {
+    height: 48px;
+    background-color: var(--color-primary);
+    color: white;
+    border-width: 0;
+    border-radius: var(--radius-control);
+    font-size: 16px;
+    -unity-font-style: bold;
+    margin: 10px 0 0 0;
+}
+
+.primary-button:hover {
+    background-color: var(--color-primary-hover);
+}
+
+/* Web版の :active { transform: translateY(2px) } に相当。
+   USSでは transform ではなく translate プロパティを使う */
+.primary-button:active {
+    translate: 0 2px;
+}
+
+.success-button {
+    height: 48px;
+    background-color: var(--color-success);
+    color: white;
+    border-width: 0;
+    border-radius: var(--radius-control);
+    font-size: 16px;
+    -unity-font-style: bold;
+    margin: 0;
+}
+
+.success-button:active {
+    translate: 0 2px;
+}
+
+.muted-button {
+    height: 44px;
+    background-color: var(--color-text-weak);
+    color: white;
+    border-width: 0;
+    border-radius: 6px;
+    font-size: 14px;
+    -unity-font-style: bold;
+    margin: 0;
+}
+
+.link-button {
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    color: var(--color-primary);
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+}
+
+/* ---------------------------------------------------------
+   フォーム
+   --------------------------------------------------------- */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* label { display:block } は不要。USSは既定で縦積み(flex-direction:column) */
+.form-label {
+    font-size: 13px;
+    -unity-font-style: bold;
+    color: var(--color-primary);
+    margin-bottom: 8px;
+}
+
+/* Web版は placeholder 属性で例を出していた。
+   Unity 6 未満の TextField には placeholder が無いため小さなラベルで代用。
+   Unity 6 以降なら UXML 側で placeholder-text="(例) u1" が使える */
+.form-hint {
+    font-size: 10px;
+    color: var(--color-text-weak);
+    margin-top: 3px;
+}
+
+.form-hint--warning {
+    color: var(--color-danger);
+    font-size: 11px;
+}
+
+.text-input .unity-base-text-field__input {
+    height: 44px;
+    background-color: var(--color-surface);
+    border-width: 1px;
+    border-color: var(--color-border);
+    border-radius: var(--radius-control);
+    padding: 0 12px;
+    font-size: 15px;
+    color: var(--color-text);
+}
+
+.text-input .unity-base-text-field__input:focus {
+    border-color: var(--color-primary);
+}
+
+/* 複数行入力 (textarea 相当)。UXML側で multiline="true" を付ける */
+.textarea .unity-base-text-field__input {
+    height: 200px;
+    padding: 12px;
+    white-space: normal;
+    -unity-text-align: upper-left;
+}
+
+/* ---------------------------------------------------------
+   モーダル
+   Web版の position:fixed は USS に無いので position:absolute。
+   親を画面いっぱいにしておけば同じ見た目になる。
+   --------------------------------------------------------- */
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    width: 85%;
+    max-width: 320px;
+    background-color: var(--color-surface);
+    border-radius: var(--radius-card);
+    padding: 25px 20px;
+}
+
+.modal-title {
+    -unity-text-align: middle-center;
+    font-size: 18px;
+    -unity-font-style: bold;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+}
+
+.modal-text {
+    font-size: 13px;
+    color: var(--color-text);
+    white-space: normal;
+    margin-bottom: 25px;
+}
+
+.modal-close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    font-size: 20px;
+    -unity-font-style: bold;
+    color: var(--color-text-weak);
+    margin: 0;
+    padding: 0;
+}
+
+/* ---------------------------------------------------------
+   情報ラベル (confirm / stamp の詳細表示)
+   --------------------------------------------------------- */
+.info-label {
+    font-size: 11px;
+    -unity-font-style: bold;
+    color: var(--color-text-weak);
+    margin-bottom: 4px;
+}
+
+.info-text {
+    font-size: 14px;
+    color: var(--color-text);
+    white-space: normal;
+    margin-bottom: 15px;
+}

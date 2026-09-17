@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    履歴・ルート案内画面 (Web版 map画面/html/history.html の移植)
+
+    Web版はタイムラインの丸印と縦線を .timeline-node::before / ::after で
+    描いていたが、USSに擬似要素は無いため、実体の VisualElement
+    (.timeline-node__dot / .timeline-node__line) をUXMLに置いて再現している。
+-->
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+
+    <Style src="Common.uss" />
+    <Style src="History.uss" />
+
+    <ui:VisualElement class="screen">
+
+        <ui:VisualElement class="app-header">
+            <ui:Button name="back-button" text="＜ 戻る" class="app-header__back" />
+            <ui:Label text="履歴・ルート案内" class="app-header__title" />
+        </ui:VisualElement>
+
+        <ui:ScrollView class="content">
+
+            <ui:Label text="📍 現在のルート" class="section-title" />
+
+            <ui:VisualElement name="timeline-container" class="timeline-container">
+
+                <ui:VisualElement class="timeline-node">
+                    <ui:VisualElement class="timeline-node__line" />
+                    <ui:VisualElement class="timeline-node__dot timeline-node__dot--current" />
+                    <ui:Label text="現在地" class="timeline-title" />
+                    <ui:Label text="出発点" class="timeline-time" />
+                </ui:VisualElement>
+
+                <ui:VisualElement class="timeline-node">
+                    <ui:VisualElement class="timeline-node__line" />
+                    <ui:VisualElement class="timeline-node__dot" />
+                    <ui:Label text="〇〇神社" class="timeline-title" />
+                    <ui:Label text="徒歩 8分 (14:30 着予定)" class="timeline-time" />
+                </ui:VisualElement>
+
+                <ui:VisualElement class="timeline-node">
+                    <ui:VisualElement class="timeline-node__line" />
+                    <ui:VisualElement class="timeline-node__dot" />
+                    <ui:Label text="〇〇駅" class="timeline-title" />
+                    <ui:Label text="徒歩 15分 (14:45 着予定)" class="timeline-time" />
+                </ui:VisualElement>
+
+                <!-- 最後のノードは縦線を置かない (Web版の :last-child::after { display:none } 相当) -->
+                <ui:VisualElement class="timeline-node timeline-node--last">
+                    <ui:VisualElement class="timeline-node__dot" />
+                    <ui:Label text="〇〇広場" class="timeline-title" />
+                    <ui:Label text="最終目的地 (15:00 着予定)" class="timeline-time" />
+                </ui:VisualElement>
+
+            </ui:VisualElement>
+
+            <ui:Button name="start-route-button" text="案内開始" class="success-button" />
+
+            <ui:Label text="🕒 過去の巡礼履歴" class="section-title section-title--spaced" />
+
+            <ui:VisualElement name="history-list" class="history-list">
+
+                <ui:VisualElement class="history-item">
+                    <ui:Label text="〇〇神社 ➔ 〇〇公園" class="history-route" />
+                    <ui:Label text="2026年05月15日(金) 14:30" class="history-date" />
+                </ui:VisualElement>
+
+                <ui:VisualElement class="history-item">
+                    <ui:Label text="〇〇公園 ➔ 〇〇広場" class="history-route" />
+                    <ui:Label text="2026年05月15日(金) 16:00" class="history-date" />
+                </ui:VisualElement>
+
+                <ui:VisualElement class="history-item">
+                    <ui:Label text="〇〇ベンチ ➔ 〇〇山" class="history-route" />
+                    <ui:Label text="2026年05月02日(土) 11:15" class="history-date" />
+                </ui:VisualElement>
+
+                <ui:VisualElement class="history-item">
+                    <ui:Label text="〇〇学校 ➔ 〇〇駅" class="history-route" />
+                    <ui:Label text="2026年04月20日(月) 15:45" class="history-date" />
+                </ui:VisualElement>
+
+            </ui:VisualElement>
+
+        </ui:ScrollView>
+
+    </ui:VisualElement>
+
+</ui:UXML>

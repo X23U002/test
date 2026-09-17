@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 新規登録画面 (Web版 map画面/html/newaccount.html の移植) -->
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+
+    <Style src="Common.uss" />
+
+    <ui:VisualElement class="screen">
+
+        <ui:VisualElement class="app-header">
+            <ui:Button name="back-button" text="＜ 戻る" class="app-header__back" />
+            <ui:Label text="新規登録" class="app-header__title" />
+        </ui:VisualElement>
+
+        <ui:VisualElement class="content content--wide">
+
+            <ui:VisualElement class="instruction">
+                <ui:Label text="名前、パスワード、メールアドレスを入力してください。" class="instruction__text" />
+            </ui:VisualElement>
+
+            <ui:VisualElement class="form-group">
+                <ui:Label text="名前" class="form-label" />
+                <ui:TextField name="username-field" class="text-input" />
+                <ui:Label text="(例) 田中太郎" class="form-hint" />
+            </ui:VisualElement>
+
+            <ui:VisualElement class="form-group">
+                <ui:Label text="パスワード" class="form-label" />
+                <ui:TextField name="password-field" password="true" class="text-input" />
+                <ui:Label text="※英数字8文字以上 / 記号不可" class="form-hint form-hint--warning" />
+            </ui:VisualElement>
+
+            <ui:VisualElement class="form-group">
+                <ui:Label text="メールアドレス" class="form-label" />
+                <ui:TextField name="email-field" class="text-input" />
+                <ui:Label text="(例) seiti150@seiti.ac.jp" class="form-hint" />
+            </ui:VisualElement>
+
+            <ui:Button name="confirm-button" text="登録確認へ" class="primary-button" />
+
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+
+</ui:UXML>

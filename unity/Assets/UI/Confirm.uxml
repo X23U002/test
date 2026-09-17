@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 登録確認画面 (Web版 map画面/html/confirm.html の移植) -->
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+
+    <Style src="Common.uss" />
+    <Style src="Confirm.uss" />
+
+    <ui:VisualElement class="screen">
+
+        <ui:VisualElement class="app-header">
+            <ui:Button name="back-button" text="＜ 戻る" class="app-header__back" />
+            <ui:Label text="登録確認" class="app-header__title" />
+        </ui:VisualElement>
+
+        <ui:VisualElement class="content content--wide">
+
+            <ui:VisualElement class="instruction">
+                <ui:Label text="以下の内容で新規登録を行います。内容に間違いがないかご確認ください。問題がなければ「登録」ボタンを押してください。" class="instruction__text" />
+            </ui:VisualElement>
+
+            <ui:VisualElement class="confirm-box">
+
+                <ui:VisualElement class="confirm-row">
+                    <ui:Label text="名前" class="info-label" />
+                    <ui:Label name="name-text" text="-" class="confirm-value" />
+                </ui:VisualElement>
+
+                <ui:VisualElement class="confirm-row">
+                    <ui:Label text="パスワード" class="info-label" />
+                    <ui:Label text="******** (非表示)" class="confirm-value" />
+                </ui:VisualElement>
+
+                <ui:VisualElement class="confirm-row confirm-row--last">
+                    <ui:Label text="メールアドレス" class="info-label" />
+                    <ui:Label name="email-text" text="-" class="confirm-value" />
+                </ui:VisualElement>
+
+            </ui:VisualElement>
+
+            <ui:Button name="register-button" text="登録" class="success-button" />
+
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+
+</ui:UXML>

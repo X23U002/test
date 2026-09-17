@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- マイページ (Web版 map画面/html/mypage.html の移植) -->
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+
+    <Style src="Common.uss" />
+    <Style src="MyPage.uss" />
+
+    <ui:VisualElement class="screen">
+
+        <ui:VisualElement class="app-header">
+            <ui:Button name="back-button" text="＜ マップに戻る" class="app-header__back" />
+            <ui:Label text="マイページ" class="app-header__title" />
+        </ui:VisualElement>
+
+        <ui:VisualElement class="content">
+
+            <ui:VisualElement class="profile-card">
+                <ui:Label name="profile-icon" text="👤" class="profile-icon" />
+                <ui:VisualElement class="profile-info">
+                    <ui:Label name="profile-name" text="田中 太郎" class="user-name" />
+                    <ui:Label text="ID: u1" class="user-id" />
+                </ui:VisualElement>
+                <ui:Button name="edit-profile-button" text="編集" class="edit-profile-button" />
+            </ui:VisualElement>
+
+            <ui:VisualElement class="menu-list">
+                <ui:Button name="history-button" class="menu-item">
+                    <ui:Label text="🕒 巡礼履歴・ルート案内" class="menu-item__label" />
+                    <ui:Label text="＞" class="menu-item__arrow" />
+                </ui:Button>
+
+                <ui:Button name="stamp-button" class="menu-item">
+                    <ui:Label text="💮 獲得スタンプ一覧" class="menu-item__label" />
+                    <ui:Label text="＞" class="menu-item__arrow" />
+                </ui:Button>
+
+                <ui:Button name="logout-button" text="ログアウト" class="menu-item menu-item--logout" />
+            </ui:VisualElement>
+
+        </ui:VisualElement>
+
+        <!-- プロフィール編集モーダル -->
+        <ui:VisualElement name="edit-modal" class="modal-overlay" style="display: none;">
+            <ui:VisualElement class="modal-content">
+
+                <ui:Button name="modal-close-button" text="✖" class="modal-close-button" />
+                <ui:Label text="プロフィール編集" class="modal-title" />
+
+                <ui:VisualElement class="form-group">
+                    <ui:Label text="名前" class="form-label" />
+                    <ui:TextField name="edit-name-field" class="text-input" />
+                </ui:VisualElement>
+
+                <ui:VisualElement class="form-group">
+                    <ui:Label text="アイコン選択" class="form-label" />
+                    <!-- Web版は display:grid; grid-template-columns:repeat(3,1fr)
+                         USSにgridは無いので flex-wrap + 子の width:33% で再現する -->
+                    <ui:VisualElement name="icon-grid" class="icon-grid">
+                        <ui:Button text="👤" class="icon-option icon-option--selected" />
+                        <ui:Button text="🐶" class="icon-option" />
+                        <ui:Button text="🐱" class="icon-option" />
+                        <ui:Button text="🦊" class="icon-option" />
+                        <ui:Button text="🐻" class="icon-option" />
+                        <ui:Button text="🐸" class="icon-option" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <ui:Button name="save-button" text="保存する" class="primary-button" />
+
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+
+</ui:UXML>

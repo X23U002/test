@@ -1,0 +1,415 @@
+/* =========================================================
+   地図画面のHUD (Web版 map画面/css/style.css の移植)
+   Web版の #id セレクタは、UI Toolkitでは name 属性でも引けるが、
+   スタイルはクラスで当てるのがUnity流なのでクラスに置き換えている。
+   ========================================================= */
+
+.hud-root {
+    flex-grow: 1;
+}
+
+/* --- 共通の丸ボタン (#hamburger-btn / #profile-btn / #location-btn) --- */
+.round-button {
+    position: absolute;
+    width: 46px;
+    height: 46px;
+    background-color: white;
+    border-width: 0;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.round-button:active {
+    scale: 0.96 0.96;
+}
+
+.hamburger-button {
+    top: 18px;
+    left: 18px;
+}
+
+.hamburger-line {
+    width: 22px;
+    height: 3px;
+    background-color: var(--color-primary);
+    border-radius: 2px;
+    margin: 2px 0;
+}
+
+.profile-button {
+    top: 18px;
+    right: 18px;
+    font-size: 20px;
+}
+
+.location-button {
+    right: 18px;
+    bottom: 145px;
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+}
+
+/* --- 検索バー --- */
+.search-field {
+    position: absolute;
+    top: 15px;
+    left: 75px;
+    right: 75px;
+    height: 46px;
+}
+
+.search-field .unity-base-text-field__input {
+    height: 46px;
+    background-color: white;
+    border-width: 0;
+    border-radius: 25px;
+    padding-left: 18px;
+    font-size: 16px;
+    color: var(--color-text);
+}
+
+/* --- アニメ絞り込みボタン --- */
+.filter-open-button {
+    position: absolute;
+    top: 80px;
+    left: 75px;
+    height: 40px;
+    padding: 0 18px;
+    background-color: white;
+    border-width: 0;
+    border-radius: 20px;
+    font-size: 14px;
+    color: var(--color-text);
+    margin: 0;
+}
+
+/* --- 2D/3D切替 --- */
+.toggle-view-button {
+    position: absolute;
+    right: 18px;
+    bottom: 85px;
+    width: 140px;
+    height: 45px;
+    background-color: #2e7d32;
+    color: white;
+    font-size: 16px;
+    -unity-font-style: bold;
+    border-width: 0;
+    border-radius: 12px;
+    margin: 0;
+}
+
+/* Web版 #toggle-view-btn.mode3d */
+.toggle-view-button--3d {
+    background-color: #1976d2;
+}
+
+/* --- 左サイドメニュー ---
+   Web版は left:-280px -> left:0 の transition で開閉していた。
+   USSも transition-property: left で同じことができる */
+.side-menu {
+    position: absolute;
+    top: 0;
+    left: -280px;
+    width: 260px;
+    height: 100%;
+    background-color: #8fd0ef;
+    padding-top: 20px;
+    transition-property: left;
+    transition-duration: 0.35s;
+}
+
+.side-menu--open {
+    left: 0;
+}
+
+.side-menu__close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    font-size: 24px;
+    color: #083d63;
+    margin: 0;
+}
+
+.side-menu__title {
+    -unity-text-align: middle-center;
+    -unity-font-style: bold;
+    font-size: 20px;
+    color: #083d63;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.side-menu__item {
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    padding: 18px 30px;
+    font-size: 18px;
+    color: #083d63;
+    -unity-text-align: middle-left;
+    margin: 0;
+}
+
+.side-menu__item:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+    padding-left: 40px;
+}
+
+/* --- アニメ絞り込みモーダル (下部ハーフシート) --- */
+.filter-modal {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 70%;
+    background-color: white;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding: 20px;
+}
+
+.filter-modal__header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.filter-modal__title {
+    font-size: 22px;
+    -unity-font-style: bold;
+    color: var(--color-text);
+}
+
+.filter-modal__close {
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    font-size: 28px;
+    margin: 0;
+}
+
+.anime-list {
+    flex-grow: 1;
+    margin: 15px 0 20px 0;
+}
+
+.anime-list-item {
+    padding: 10px;
+    border-bottom-width: 1px;
+    border-bottom-color: #eeeeee;
+}
+
+.filter-modal__buttons {
+    flex-direction: row;
+}
+
+/* Web版の flex:1 / flex:2 をそのまま flex-grow で表現 */
+.filter-modal__reset {
+    flex-grow: 1;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.filter-modal__ok {
+    flex-grow: 2;
+    height: 50px;
+    margin: 0;
+    font-size: 18px;
+}
+
+/* --- 経路案内パネル --- */
+.route-panel {
+    position: absolute;
+    top: 80px;
+    right: 15px;
+    width: 280px;
+    max-height: 50%;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: var(--radius-card);
+    padding: 15px;
+}
+
+.route-panel__header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom-width: 2px;
+    border-bottom-color: #ecf0f1;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.route-panel__title {
+    font-size: 16px;
+    -unity-font-style: bold;
+    color: var(--color-primary);
+}
+
+.route-panel__clear {
+    background-color: var(--color-danger);
+    color: white;
+    border-width: 0;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 12px;
+    margin: 0;
+}
+
+.route-list {
+    flex-grow: 1;
+    margin-bottom: 15px;
+}
+
+.route-item {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom-width: 1px;
+    border-bottom-color: var(--color-border);
+}
+
+.route-item__label {
+    font-size: 14px;
+    -unity-font-style: bold;
+    color: var(--color-text);
+    flex-grow: 1;
+}
+
+.route-item__remove {
+    width: 26px;
+    height: 26px;
+    background-color: var(--color-text-weak);
+    color: white;
+    border-width: 0;
+    border-radius: 50%;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- スポット詳細ポップアップ --- */
+.popup-card {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 300px;
+    background-color: white;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.popup-card__close {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    font-size: 20px;
+    color: #333333;
+    margin: 0;
+}
+
+/* display:inline-block の代替は align-self:flex-start */
+.popup-title {
+    align-self: flex-start;
+    background-color: var(--color-primary);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    -unity-font-style: bold;
+    margin-bottom: 12px;
+}
+
+.popup-spot {
+    font-size: 22px;
+    color: #222222;
+    -unity-font-style: bold;
+    margin: 10px 0;
+    white-space: normal;
+}
+
+.popup-section-label {
+    -unity-font-style: bold;
+    color: var(--color-primary);
+    margin-bottom: 6px;
+}
+
+.popup-section-text {
+    font-size: 15px;
+    color: var(--color-text);
+    white-space: normal;
+}
+
+/* Web版は <img> に object-fit:cover を指定していた。
+   USSでは -unity-background-scale-mode: scale-and-crop が相当する。
+   画像はC#側で UnityWebRequestTexture で読み、style.backgroundImage に入れる */
+.popup-image {
+    height: 180px;
+    margin-top: 15px;
+    background-color: #eeeeee;
+    border-radius: 10px;
+    -unity-background-scale-mode: scale-and-crop;
+}
+
+.stamp-message {
+    font-size: 13px;
+    color: #444444;
+    margin: 12px 0 8px 0;
+    white-space: normal;
+}
+
+.stamp-button {
+    min-height: 42px;
+    background-color: #f59e0b;
+    color: white;
+    border-width: 0;
+    border-radius: 9px;
+    font-size: 15px;
+    -unity-font-style: bold;
+    margin: 0 0 10px 0;
+}
+
+/* Web版 .stamp-button:disabled */
+.stamp-button:disabled {
+    background-color: #cbd5e1;
+    color: #475569;
+}
+
+.popup-buttons {
+    flex-direction: row;
+    margin-top: 8px;
+}
+
+.popup-home {
+    width: 50px;
+    height: 50px;
+    background-color: #0d92eb;
+    color: white;
+    border-width: 0;
+    border-radius: 50%;
+    font-size: 22px;
+    margin: 0 10px 0 0;
+}
+
+.popup-route-button {
+    flex-grow: 1;
+    height: 50px;
+    background-color: #0d92eb;
+    color: white;
+    border-width: 0;
+    border-radius: 10px;
+    font-size: 17px;
+    -unity-font-style: bold;
+    margin: 0;
+}

@@ -1,0 +1,34 @@
+/* 登録確認画面 (Web版 map画面/css/confirm.css の移植) */
+
+.confirm-box {
+    background-color: var(--color-surface);
+    padding: 20px;
+    border-radius: var(--radius-control);
+    border-width: 1px;
+    border-color: var(--color-border);
+    margin-bottom: 25px;
+}
+
+/* .info-group { border-bottom: 1px dashed #ecf0f1 }
+   USSに破線 (border-style) は無いため実線で代用している */
+.confirm-row {
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom-width: 1px;
+    border-bottom-color: #ecf0f1;
+}
+
+/* :last-child セレクタはUSSでは使えないので、
+   UXML側で明示的にクラスを付けて最後の行を表現する */
+.confirm-row--last {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom-width: 0;
+}
+
+.confirm-value {
+    font-size: 16px;
+    color: var(--color-primary);
+    -unity-font-style: bold;
+    white-space: normal;
+}
